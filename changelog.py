@@ -44,5 +44,6 @@ if __name__ == '__main__':
     commits_not_in_main = [commit for commit in commit_list_branch if commit not in commit_list]
 
     text = (export_summary(commits_not_in_main))
+    text = text.replace('\n', '\\n')
 
     print(f'::set-output name=changelog::{text}')
