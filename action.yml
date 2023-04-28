@@ -4,6 +4,10 @@ inputs:
   gitea-token:
     description: 'Gitea token'
     required: true
+outputs:
+  output:
+    description: 'The output'
+    value: ${{ steps.script.outputs.output }}
 
 runs:
   using: composite
