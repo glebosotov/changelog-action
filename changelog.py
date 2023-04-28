@@ -43,4 +43,6 @@ if __name__ == '__main__':
     commit_list = get_commit_list(url, repo_name, 'main', gitea_token)
     commits_not_in_main = [commit for commit in commit_list_branch if commit not in commit_list]
 
-    print(export_summary(commits_not_in_main))
+    text = (export_summary(commits_not_in_main))
+
+    print(f'::set-output name=changelog::{text}')
