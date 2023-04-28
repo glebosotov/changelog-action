@@ -52,8 +52,8 @@ if __name__ == '__main__':
     if len(commits_not_in_main) == 0:
         ## we are in main
         latest_commit = commit_list_branch[0]
-        assert len(latest_commit['parents']) == 2, '::set-output name=changelog::Error in commit structure'
-        latest = latest_commit['parents'][1]['sha']
+        assert len(latest_commit['parents']) <= 2, '::set-output name=changelog::Error in commit structure'
+        latest = latest_commit['parents'][-1]['sha']
         oldest = latest_commit['parents'][0]['sha']
         oldest_index = [i for i, commit in enumerate(commit_list) if commit['sha'] == oldest][0]
         latest_index = [i for i, commit in enumerate(commit_list) if commit['sha'] == latest][0]
