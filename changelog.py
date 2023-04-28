@@ -1,6 +1,7 @@
 import os
 import re
 
+# import dotenv
 import httpx
 
 
@@ -11,7 +12,7 @@ def get_commit_list(url, repo, base_commit, token):
     }
 
     url = f'{url}/api/v1/repos/{repo}/commits?sha={base_commit}'
-    # print(url)
+    print(url)
     response = httpx.get(url, headers=headers)
     if response.status_code != 200:
         return []
@@ -35,6 +36,7 @@ def export_summary(commits_not_in_main):
     return summary_text
 
 if __name__ == '__main__':
+    # dotenv.load_dotenv()
     url = os.environ['GITHUB_API_URL']
     repo_name = os.environ['GITHUB_REPOSITORY']
     base_commit = os.environ['GITHUB_SHA']
@@ -45,5 +47,5 @@ if __name__ == '__main__':
 
     text = (export_summary(commits_not_in_main))
     text = text.replace('\n', '\\n')
-
+    print(base_commit)
     print(f'::set-output name=changelog::{text}')
