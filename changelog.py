@@ -11,7 +11,7 @@ def get_commit_list(url, repo, base_commit, token):
     }
 
     url = f'{url}/api/v1/repos/{repo}/commits?sha={base_commit}'
-    print(url)
+    # print(url)
     response = httpx.get(url, headers=headers)
     if response.status_code != 200:
         return []

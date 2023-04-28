@@ -16,4 +16,7 @@ jobs:
       - uses: ./
         with:
           gitea-token: ${{ secrets.GGITEA_TOKEN }}
+      - name: Print output
+        run: |
+          echo "Output: ${{ steps.test-action.outputs.output }}"
 
