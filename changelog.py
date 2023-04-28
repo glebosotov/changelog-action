@@ -43,7 +43,8 @@ if __name__ == '__main__':
     gitea_token = os.environ['INPUT_GITEA-TOKEN']
     commit_list_branch = get_commit_list(url, repo_name, base_commit, gitea_token)
     commit_list = get_commit_list(url, repo_name, 'main', gitea_token)
-    commits_not_in_main = [commit for commit in commit_list_branch if commit not in commit_list]
+    commit_shas = [commit['sha'] for commit in commit_list]
+    commits_not_in_main = [commit for commit in commit_list_branch if commit['sha'] not in commit_shas]
 
     text = (export_summary(commits_not_in_main))
     text = text.replace('\n', '\\n')
