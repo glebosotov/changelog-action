@@ -1,12 +1,6 @@
 name: send-message 
 description: Send an alert to Telegram or Rocket Chat 
 inputs:
-  gitea-url:
-    description: 'Gitea URL in format https://gitea.example.com/Owner/Repo'
-    required: true
-  base:
-    description: 'Branch ref'
-    required: true
   gitea-token:
     description: 'Gitea token'
     required: true

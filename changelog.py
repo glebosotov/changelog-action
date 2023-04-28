@@ -37,7 +37,7 @@ def export_summary(commits_not_in_main):
 if __name__ == '__main__':
     url = os.environ['GITHUB_API_URL']
     repo_name = os.environ['GITHUB_REPOSITORY']
-    base_commit = os.environ['INPUT_BASE']
+    base_commit = os.environ['GITHUB_SHA']
     gitea_token = os.environ['INPUT_GITEA-TOKEN']
     commit_list_branch = get_commit_list(url, repo_name, base_commit, gitea_token)
     commit_list = get_commit_list(url, repo_name, 'main', gitea_token)
