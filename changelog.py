@@ -43,9 +43,9 @@ def export_summary(commits_not_in_main):
     return summary_text
 
 if __name__ == '__main__':
-    url = os.environ['INPUTS_GITEA-URL']
-    base_commit = os.environ['INPUTS_BASE']
-    gitea_token = os.environ['INPUTS_GITEA-TOKEN']
+    url = os.environ['INPUT_GITEA-URL']
+    base_commit = os.environ['INPUT_BASE']
+    gitea_token = os.environ['INPUT_GITEA-TOKEN']
     commit_list_branch = get_commit_list(url, base_commit, gitea_token)
     commit_list = get_commit_list(url, 'main', gitea_token)
     commits_not_in_main = [commit for commit in commit_list_branch if commit not in commit_list]
