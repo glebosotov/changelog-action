@@ -55,10 +55,19 @@ if __name__ == '__main__':
         assert len(latest_commit['parents']) <= 2, '::set-output name=changelog::Error in commit structure'
         latest = latest_commit['parents'][-1]['sha']
         oldest = latest_commit['parents'][0]['sha']
-        oldest_index = [i for i, commit in enumerate(commit_list) if commit['sha'] == oldest][0]
-        latest_index = [i for i, commit in enumerate(commit_list) if commit['sha'] == latest][0]
-        commits_not_in_main = commit_list[oldest_index:latest_index]
-        print(latest, oldest)
+        # oldest_index = [i for i, commit in enumerate(commit_list_branch) if commit['sha'] == oldest][0]
+        # latest_index = [i for i, commit in enumerate(commit_list_branch) if commit['sha'] == latest][0]
+        # commits_not_in_main = commit_list_branch[latest_commit:oldest_index]
+        # print(oldest_index)
+
+        src = get_commit_list(url, repo_name, latest, gitea_token)
+        if latest == oldest:
+            diff = [src[0]]
+        else:
+            dst = set(get_commit_list(url, repo_name, oldest, gitea_token))
+            diff = [i for i in src if i not in dst]
+
+        commits_not_in_main = diff        
 
     text = (export_summary(commits_not_in_main))
     text = text.replace('\n', '\\n')
