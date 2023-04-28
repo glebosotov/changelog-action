@@ -47,5 +47,5 @@ if __name__ == '__main__':
 
     text = (export_summary(commits_not_in_main))
     text = text.replace('\n', '\\n')
-    print(base_commit)
+    print(len(commits_not_in_main))
     print(f'::set-output name=changelog::{text}')
