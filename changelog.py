@@ -4,21 +4,13 @@ import re
 import httpx
 
 
-def get_commit_list(url, base_commit, token):
+def get_commit_list(url, repo, base_commit, token):
     headers = {
         'Authorization': f'Bearer {token}',
         'Content-Type': 'application/json'
     }
-    regex = r'(https?://[^/]+)/(?P<owner>[^/]+)/(?P<repo>[^/]+)/?'
 
-    match = re.match(regex, url)
-    if not match:
-        raise ValueError('Invalid Gitea URL')
-    base_url = match.group(1)
-    owner = match.group('owner')
-    repo = match.group('repo')
-
-    url = f'{base_url}/api/v1/repos/{owner}/{repo}/commits?sha={base_commit}'
+    url = f'{url}/api/v1/repos/{repo}/commits?sha={base_commit}'
     print(url)
     response = httpx.get(url, headers=headers)
     if response.status_code != 200:
@@ -43,11 +35,12 @@ def export_summary(commits_not_in_main):
     return summary_text
 
 if __name__ == '__main__':
-    url = os.environ['INPUT_GITEA-URL']
+    url = os.environ['GITHUB_API_URL']
+    repo_name = os.environ['GITHUB_REPOSITORY']
     base_commit = os.environ['INPUT_BASE']
     gitea_token = os.environ['INPUT_GITEA-TOKEN']
-    commit_list_branch = get_commit_list(url, base_commit, gitea_token)
-    commit_list = get_commit_list(url, 'main', gitea_token)
+    commit_list_branch = get_commit_list(url, repo_name, base_commit, gitea_token)
+    commit_list = get_commit_list(url, repo_name, 'main', gitea_token)
     commits_not_in_main = [commit for commit in commit_list_branch if commit not in commit_list]
 
     print(export_summary(commits_not_in_main))
