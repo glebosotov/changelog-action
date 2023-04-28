@@ -1,7 +1,6 @@
 import os
 import re
 
-import dotenv
 import httpx
 
 
@@ -36,7 +35,11 @@ def export_summary(commits_not_in_main):
     return summary_text
 
 if __name__ == '__main__':
-    dotenv.load_dotenv()
+    try:
+        import dotenv
+        dotenv.load_dotenv()
+    except ModuleNotFoundError:
+        pass
     url = os.environ['GITHUB_API_URL']
     repo_name = os.environ['GITHUB_REPOSITORY']
     base_commit = os.environ['GITHUB_SHA']
