@@ -58,6 +58,7 @@ if __name__ == '__main__':
         oldest_index = [i for i, commit in enumerate(commit_list) if commit['sha'] == oldest][0]
         latest_index = [i for i, commit in enumerate(commit_list) if commit['sha'] == latest][0]
         commits_not_in_main = commit_list[oldest_index:latest_index]
+        print(latest, oldest)
 
     text = (export_summary(commits_not_in_main))
     text = text.replace('\n', '\\n')
