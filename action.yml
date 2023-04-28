@@ -1,0 +1,26 @@
+name: send-message 
+description: Send an alert to Telegram or Rocket Chat 
+inputs:
+  gitea-token:
+    description: 'Gitea token'
+    required: true
+outputs:
+  output:
+    description: 'The output'
+    value: ${{ steps.script.outputs.changelog }}
+
+runs:
+  using: composite
+  steps:
+    # - name: Install Python
+    #   uses: actions/setup-python@v4
+    - name: Install dependencies
+      run: pip3 install -r requirements.txt
+      shell: bash
+    # - name: Pass inputs to shell
+    #   run: echo "INPUT_NUM=${{ inputs.num }}" >> $GITHUB_ENV
+    #   shell: bash
+    - name: run-script
+      id: script
+      run: python3 changelog.py
+      shell: bash

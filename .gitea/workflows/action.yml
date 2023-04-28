@@ -1,0 +1,23 @@
+name: Test
+description: Test
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-action:
+    runs-on: macOS
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./
+        id: script
+        with:
+          gitea-token: ${{ secrets.GGITEA_TOKEN }}
+      - name: Print output
+        run: |
+          echo "Output: ${{ steps.script.outputs.output }}"
+
