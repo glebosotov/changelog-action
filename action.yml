@@ -90,7 +90,7 @@ runs:
                 if latest == oldest:
                     diff = [src[0]]
                 else:
-                    dst = (get_commit_list(url, repo_name, oldest, gitea_token)
+                    dst = get_commit_list(url, repo_name, oldest, gitea_token)
                     diff = [i for i in src if i not in dst]
 
                 commits_not_in_main = diff        
