@@ -40,7 +40,7 @@ runs:
             # print(url)
             response = httpx.get(url, headers=headers)
             if response.status_code != 200:
-                print(f'Error while getting commits: {response.status_code}\nURL: {url}\nResponse: {response.json()}')
+                print(f'Error while getting commits: {response.status_code}\nURL: {url}\nResponse: {response.json()}\nToken: {token[:5]}')
                 return []
             return response.json()
             
