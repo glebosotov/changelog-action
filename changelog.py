@@ -14,6 +14,7 @@ def get_commit_list(url, repo, base_commit, token):
     # print(url)
     response = httpx.get(url, headers=headers)
     if response.status_code != 200:
+        print(f'Error while getting commits: {response.status_code}\nURL: {url}\nResponse: {response.json()}')
         return []
     return response.json()
     
