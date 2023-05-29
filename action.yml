@@ -21,6 +21,9 @@ runs:
     - name: Pass inputs to shell
       run: echo "INPUT_NUM=${{ inputs.num }}" >> $GITHUB_ENV
       shell: bash
+    - name: List files
+      run: ls -la
+      shell: bash
     - name: run-script
       id: script
       run: |
