@@ -1,5 +1,5 @@
-name: send-message 
-description: Send an alert to Telegram or Rocket Chat 
+name: generate-changelog 
+description: Create a changelog from Gitea 
 inputs:
   gitea_token:
     description: 'Gitea token'
@@ -8,9 +8,6 @@ outputs:
   output:
     description: 'The output'
     value: ${{ steps.script.outputs.changelog }}
-  test-action:
-    description: 'Test action'
-    value: test
 
 runs:
   using: composite

@@ -23,7 +23,7 @@ def export_summary(commits_not_in_main):
 
     whitelisted_commit_types = ['feat', 'fix', 'refactor', 'perf', 'chore', 'docs', 'style', 'test']
 
-    summary_text = 'Changes since last release:\n'
+    summary_text = ''
     for commit in commits_not_in_main:
         commit_message = commit['commit']['message']
         # if commit message does not follow conventional commit format, skip it
@@ -34,6 +34,8 @@ def export_summary(commits_not_in_main):
             summary_text += f'\n - {commit_message}'
     # set max length to 500
     summary_text = summary_text[:500]
+    if len(summary_text) == 0:
+        summary_text = 'No changes (or they do not follow conventional commit format)'
     return summary_text
 
 if __name__ == '__main__':
