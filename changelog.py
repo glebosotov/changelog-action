@@ -71,6 +71,5 @@ if __name__ == '__main__':
         commits_not_in_main = diff        
 
     text = (export_summary(commits_not_in_main))
-    text = text.replace('\n', '\\n')
-    # print(len(commits_not_in_main))
+    text = text.replace("\n", "\\n")
     print(f'::set-output name=changelog::{text}')
