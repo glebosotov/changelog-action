@@ -23,6 +23,8 @@ runs:
       shell: bash
     - name: run-script
       id: script
+      env:
+        INPUT_GITEA_TOKEN: ${{ inputs.gitea_token }}
       run: |
         python3 ${{ github.action_path }}/changelog.py
       shell: bash
