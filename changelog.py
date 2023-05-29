@@ -1,3 +1,4 @@
+import json
 import os
 import re
 
@@ -44,23 +45,17 @@ if __name__ == '__main__':
     url = os.environ['GITHUB_API_URL']
     repo_name = os.environ['GITHUB_REPOSITORY']
     base_commit = os.environ['GITHUB_SHA']
-    gitea_token = os.environ['INPUT_GITEA-TOKEN']
+    gitea_token = os.environ['INPUT_GITEA_TOKEN']
     commit_list_branch = get_commit_list(url, repo_name, base_commit, gitea_token)
     commit_list = get_commit_list(url, repo_name, 'main', gitea_token)
-    # commit_shas = [commit['sha'] for commit in commit_list]
     commits_not_in_main = [commit for commit in commit_list_branch if commit not in commit_list]
-
     if len(commits_not_in_main) == 0:
         ## we are in main
         latest_commit = commit_list_branch[0]
         assert len(latest_commit['parents']) <= 2, '::set-output name=changelog::Error in commit structure'
         latest = latest_commit['parents'][-1]['sha']
         oldest = latest_commit['parents'][0]['sha']
-        # oldest_index = [i for i, commit in enumerate(commit_list_branch) if commit['sha'] == oldest][0]
-        # latest_index = [i for i, commit in enumerate(commit_list_branch) if commit['sha'] == latest][0]
-        # commits_not_in_main = commit_list_branch[latest_commit:oldest_index]
-        # print(oldest_index)
-
+        print(latest, oldest)
         src = get_commit_list(url, repo_name, latest, gitea_token)
         if latest == oldest:
             diff = [src[0]]

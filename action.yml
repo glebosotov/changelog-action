@@ -1,7 +1,7 @@
 name: send-message 
 description: Send an alert to Telegram or Rocket Chat 
 inputs:
-  gitea-token:
+  gitea_token:
     description: 'Gitea token'
     required: true
 outputs:
@@ -17,9 +17,9 @@ runs:
     - name: Install dependencies
       run: pwd; pip3 install httpx
       shell: bash
-    # - name: Pass inputs to shell
-    #   run: echo "INPUT_NUM=${{ inputs.num }}" >> $GITHUB_ENV
-    #   shell: bash
+    - name: Pass inputs to shell
+      run: echo "INPUT_NUM=${{ inputs.num }}" >> $GITHUB_ENV
+      shell: bash
     - name: run-script
       id: script
       run: |
@@ -70,7 +70,7 @@ runs:
             url = os.environ['GITHUB_API_URL']
             repo_name = os.environ['GITHUB_REPOSITORY']
             base_commit = os.environ['GITHUB_SHA']
-            gitea_token = os.environ['INPUT_GITEA-TOKEN']
+            gitea_token = os.environ['INPUT_GITEA_TOKEN']
             commit_list_branch = get_commit_list(url, repo_name, base_commit, gitea_token)
             commit_list = get_commit_list(url, repo_name, 'main', gitea_token)
             # commit_shas = [commit['sha'] for commit in commit_list]

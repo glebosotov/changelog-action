@@ -16,7 +16,7 @@ jobs:
       - uses: ./
         id: script
         with:
-          gitea-token: ${{ secrets.GGITEA_TOKEN }}
+          gitea_token: ${{ secrets.GGITEA_TOKEN }}
       - name: Print output
         run: |
           echo "Output: ${{ steps.script.outputs.output }}"
