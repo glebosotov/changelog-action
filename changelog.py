@@ -68,3 +68,7 @@ if __name__ == '__main__':
     text = (export_summary(commits_not_in_main))
     text = text.replace("\n", "\\n")
     print(f'::set-output name=changelog::{text}')
+    # write to file $GITHUB_OUTPUT
+    with open(os.environ['GITHUB_OUTPUT'], 'w') as f:
+        text_to_write = 'changelog=' + text
+        f.write(text_to_write)
