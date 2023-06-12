@@ -2,6 +2,7 @@ import json
 import os
 import re
 
+import curlify2
 import httpx
 
 
@@ -14,6 +15,7 @@ def get_commit_list(url, repo, base_commit, token):
     url = f'{url}/repos/{repo}/commits?sha={base_commit}'
     # print(url)
     response = httpx.get(url, headers=headers)
+    print(curlify2.to_curl(response.request))
     if response.status_code != 200:
         print(f'Error while getting commits: {response.status_code}\nURL: {url}\nResponse: {response.json()}')
         return []
