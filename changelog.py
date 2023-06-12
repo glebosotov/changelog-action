@@ -15,7 +15,7 @@ def get_commit_list(url, repo, base_commit, token):
     url = f'{url}/repos/{repo}/commits?sha={base_commit}'
     print(url)
     response = httpx.get(url, headers=headers, timeout=None)
-    response2 = Curlify(request.request)
+    response2 = curlify2(request.request)
     print(curlify2.to_curl(response2.request))
     if response.status_code != 200:
         print(f'Error while getting commits: {response.status_code}\nURL: {url}\nResponse: {response.json()}')
