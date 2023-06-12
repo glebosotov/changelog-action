@@ -48,6 +48,7 @@ if __name__ == '__main__':
     repo_name = os.environ['GITHUB_REPOSITORY']
     base_commit = os.environ['GITHUB_SHA']
     gitea_token = os.environ['INPUT_GITEA_TOKEN']
+    print(f'Looking for commits in Repo {repo_name} at {url}. Commit hash: {base_commit}')
     commit_list_branch = get_commit_list(url, repo_name, base_commit, gitea_token)
     commit_list = get_commit_list(url, repo_name, 'main', gitea_token)
     commits_not_in_main = [commit for commit in commit_list_branch if commit not in commit_list]
