@@ -13,7 +13,7 @@ runs:
   using: composite
   steps:
     - name: Install dependencies
-      run: pwd; pip3 install httpx
+      run: pip3 install httpx curlify2
       shell: bash
     - name: Pass inputs to shell
       run: echo "INPUT_NUM=${{ inputs.num }}" >> $GITHUB_ENV
